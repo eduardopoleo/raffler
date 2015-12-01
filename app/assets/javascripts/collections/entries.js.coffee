@@ -1,2 +1,18 @@
 class Raffler.Collections.Entries extends Backbone.Collection
-  url: 'api/entries' #why url?
+  url: 'api/entries'
+  # this generates the following urls for interacting with the url (very similar to rails resources)
+  # GET  /books/ .... collection.fetch();
+  # POST /books/ .... collection.create(); #just a regular create route
+  # GET  /books/1 ... model.fetch();
+  # PUT  /books/1 ... model.save();
+  # DEL  /books/1 ... model.destroy();
+  # we will obviously need to have this routes in our rails api for it to work
+
+  #the collection is going to interact with the api layer and needs to know
+  #where is going to fetch the data from.
+  #we are dumping the data into that url. Backbone is going to make the 'ajax' call for us
+
+  #collection.fetch() makes a get request to the server on the
+  #model.get('property')
+  #model.set({property: 'value'})
+  #model.save will actually

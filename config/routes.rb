@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+  #the reason he is using api is because this are going to be the Routers
+  #he is going to use to dump the data!! and perform crud actions.
+  #he is using rails as an api!
+
   scope "api" do
     resources :entries
   end
-  
+
+  # this other routes are going to be use by backbone to do its magic.
   root to: "main#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
