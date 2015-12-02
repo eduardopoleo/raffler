@@ -8,11 +8,10 @@ class Raffler.Collections.Entries extends Backbone.Collection
   # DEL  /books/1 ... model.destroy();
   # we will obviously need to have this routes in our rails api for it to work
 
-  #the collection is going to interact with the api layer and needs to know
-  #where is going to fetch the data from.
-  #we are dumping the data into that url. Backbone is going to make the 'ajax' call for us
+  #Interacts with the api layer and needs to know where is going to fetch the data from.
 
-  #collection.fetch() makes a get request to the server on the
+  #Backbone handles ajax calls directly with
+  #collection.fetch()
   #model.get('property')
   #model.set({property: 'value'})
   #model.save will actually

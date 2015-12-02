@@ -5,10 +5,4 @@
   <input type="submit" value="add">
 </form>
 
-<ul>
-  <% for entry in @entries.models: %>
-    <li>
-      <%= entry.get('name') %>
-    </li>
-  <% end %>
-</ul>
+<ul id='entries'> </ul>
