@@ -1,1 +1,1 @@
-Entry goes here
+<%= @entry.get('name') %>

@@ -7,10 +7,10 @@ class Raffler.Views.EntriesIndex extends Backbone.View
     'submit #new_entry': 'createEntry'
 
   initialize: ->
-    #This is insane! So the view might render the the template before the response
-    #has come back from the server so we need to listen and wait until the
-    # We register an event any time the @collection changes.
-    @listenTo @collection, "reset add change remove", @render, this
+    #This are DATA changes events
+    @listenTo @collection, "reset", @render, this
+    @listenTo @collection, "add", @appendEntry, this
+
     #These are events that mark the changes over data
 
     #After we have registered the callbacks we fetch the records
@@ -22,12 +22,23 @@ class Raffler.Views.EntriesIndex extends Backbone.View
     @collection.each(@appendEntry)
     this #so That we can chain methods
 
-  appendEntry: ->
-    view = new Raffler.Views.Entry()
+  appendEntry: (entry) ->
+    view = new Raffler.Views.Entry(model: entry)
+    $('#entries').append(view.render().el)
 
   createEntry: (e) ->
     e.preventDefault()
-    @collection.create name: $("#new_entry_name").val() #this actually persist into the database
+    attributes = name: $("#new_entry_name").val()
+    @collection.create attributes, #this actually persist into the database
+      wait: true
+      success: -> $('#new_entry')[0].reset()
+      error: @handleError
+
+  handleError: (entry, response) ->
+    if response.status == 422
+      errors = $.parseJSON(response.responseText).errors
+      for attribute, messages of errors
+        alert "#{attribute}, #{message}" for message in messages
 
 
 #The problem with this is that every time that the collection changes we have
