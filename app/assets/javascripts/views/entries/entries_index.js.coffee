@@ -5,6 +5,7 @@ class Raffler.Views.EntriesIndex extends Backbone.View
   #these are DOM events! They are defined at the top
   events:
     'submit #new_entry': 'createEntry'
+    'click #draw' : 'drawWinner'
 
   initialize: ->
     #This are DATA changes events
@@ -25,6 +26,13 @@ class Raffler.Views.EntriesIndex extends Backbone.View
   appendEntry: (entry) ->
     view = new Raffler.Views.Entry(model: entry)
     $('#entries').append(view.render().el)
+
+  drawWinner: (e) ->
+    e.preventDefault()
+    @collection.drawWinner() #this.collection what is it? does it magically knows
+    #that is the view collection?
+    #the collection I passed in from the router.
+    #complex logic is best put in the model just like in rails
 
   createEntry: (e) ->
     e.preventDefault()

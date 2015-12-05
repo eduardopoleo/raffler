@@ -15,3 +15,11 @@ class Raffler.Collections.Entries extends Backbone.Collection
   #model.get('property')
   #model.set({property: 'value'})
   #model.save will actually
+
+  drawWinner: ->
+    winner = @shuffle()[0]
+    if winner
+      winner.set(winner: true)
+      winner.save()
+      winner.trigger('highlight')
+      #we can trigger any event. But how do I know who listes to it?
