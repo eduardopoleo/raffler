@@ -1,5 +1,7 @@
 class Raffler.Collections.Entries extends Backbone.Collection
   url: 'api/entries'
+  model: Raffler.Models.Entry #So that it knows which model are we refering to.
+
   # this generates the following urls for interacting with the url (very similar to rails resources)
   # GET  /books/ .... collection.fetch();
   # POST /books/ .... collection.create(); #just a regular create route
@@ -18,8 +20,4 @@ class Raffler.Collections.Entries extends Backbone.Collection
 
   drawWinner: ->
     winner = @shuffle()[0]
-    if winner
-      winner.set(winner: true)
-      winner.save()
-      winner.trigger('highlight')
-      #we can trigger any event. But how do I know who listes to it?
+    winner.win() if winner

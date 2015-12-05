@@ -10,9 +10,8 @@ class Raffler.Views.Entry extends Backbone.View
     #the event just happens on the model and this will know
 
   highlightWinner: ->
-    console.log('there is a winner')
     $('.winner').removeClass('hightlight')
-    @$('.winner').addClass('hightlight')
+    @$('.winner').addClass('hightlight') #@I think targets the current element
 
   render: ->
     $(@el).html(@template(entry: @model))
